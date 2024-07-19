@@ -17,7 +17,7 @@ spec:
         runAsUser: 1000
       containers:
         - name: student-app
-          image: ${REPOSITORY_TAG}
+          image: sandeeplv/student-app:v3
           imagePullPolicy: Never
           ports:
             - containerPort: 8080
