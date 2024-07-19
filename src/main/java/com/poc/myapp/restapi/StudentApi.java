@@ -2,10 +2,15 @@ package com.poc.myapp.restapi;
 
 import com.poc.myapp.StudentService;
 import com.poc.myapp.entity.Student;
+import com.poc.myapp.model.StudentDTO;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -23,7 +28,8 @@ public class StudentApi {
     }
 
     @GetMapping("/student/{id}")
-    public Optional<Student> getStudent(@PathVariable("id") Long id) {
-        return studentService.getStudent(id);
+    public ResponseEntity<StudentDTO> getStudent(@PathVariable("id") Long id) {
+        return ResponseEntity.ok()
+                .body(studentService.getStudent(id));
     }
 }
