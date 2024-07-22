@@ -3,7 +3,7 @@ package com.poc.myapp;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.poc.myapp.entity.Student;
-import com.poc.myapp.kafka.KafkaProducer;
+import com.poc.myapp.kafka.StudentProducer;
 import com.poc.myapp.mapper.StudentMapper;
 import com.poc.myapp.model.StudentRequest;
 import com.poc.myapp.model.StudentResponse;
@@ -22,17 +22,17 @@ public class StudentService {
 
     private StudentRepository studentRepository;
 
-    private KafkaProducer kafkaProducer;
+    private StudentProducer studentProducer;
 
     @Value("${topic.name:student}")
     private String topicName;
 
     public StudentService(StudentRepository studentRepository,
                           StudentMapper studentMapper,
-                          KafkaProducer kafkaProducer) {
+                          StudentProducer studentProducer) {
         this.studentRepository = studentRepository;
         this.studentMapper = studentMapper;
-        this.kafkaProducer = kafkaProducer;
+        this.studentProducer = studentProducer;
     }
 
     public StudentResponse getStudent(final Long id) {
@@ -49,7 +49,7 @@ public class StudentService {
                 .append("-")
                 .append(studentResponse.getFirstName()).toString();
                 try {
-                    kafkaProducer.sendMessageAsync(topicName, topicKey, OBJECT_MAPPER
+                    studentProducer.sendMessageAsync(topicName, topicKey, OBJECT_MAPPER
                             .writeValueAsString(studentResponse));
                 } catch (JsonProcessingException jpe) {
                     // log error
