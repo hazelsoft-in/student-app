@@ -17,21 +17,21 @@ spec:
         runAsUser: 1000
       containers:
         - name: student-app
-          image: sandeeplv/student-app:v3
-          imagePullPolicy: Never
+          image: sandeeplv/student-app:v16
+          #imagePullPolicy: Never
           ports:
             - containerPort: 8080
           livenessProbe:
             httpGet:
               path: /actuator/health
               port: 8080
-            initialDelaySeconds: 3
+            initialDelaySeconds: 9
             periodSeconds: 3
           readinessProbe:
             httpGet:
               path: /actuator/health
               port: 8080
-            initialDelaySeconds: 5
+            initialDelaySeconds: 9
             periodSeconds: 3
 ---
 apiVersion: v1
