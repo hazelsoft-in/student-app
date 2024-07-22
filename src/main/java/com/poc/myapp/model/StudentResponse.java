@@ -3,7 +3,7 @@ package com.poc.myapp.model;
 import lombok.Data;
 
 @Data
-public class StudentDTO {
+public class StudentResponse {
 
     private Long id;
     private String firstName;
