@@ -29,7 +29,9 @@ public class StudentApi {
 
     @PostMapping("/student")
     public ResponseEntity<StudentResponse> createStudent(@RequestBody StudentRequest studentRequest) {
+        StudentResponse studentResponse = studentService.createStudent(studentRequest);
         return ResponseEntity.ok()
-                .body(studentService.createStudent(studentRequest));
+                .header("id",studentResponse.getId().toString())
+                .build();
     }
 }
