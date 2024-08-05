@@ -2,8 +2,9 @@ pipeline {
    agent any
 
 stages {
-  steps {
+ 
     stage("Git Clone"){
+     steps {
 
         git credentialsId: 'GIT_HUB_CREDENTIALS', url: 'https://github.com/hazelsoft-in/student-app.git'
      }
