@@ -1,7 +1,8 @@
 pipeline {
    agent any
 
-   node {
+stages {
+
     stage("Git Clone"){
 
         git credentialsId: 'GIT_HUB_CREDENTIALS', url: 'https://github.com/hazelsoft-in/student-app.git'
@@ -35,7 +36,7 @@ pipeline {
        sh 'kubectl apply -f deploy.yaml'
         
     }
+ }
     
     
-}
 }
