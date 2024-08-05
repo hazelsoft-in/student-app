@@ -18,7 +18,7 @@ stages {
         sh 'docker version'
         sh 'docker build -t student-app .'
         sh 'docker image list'
-        sh 'docker tag student-app sandeeplv/student-app:v30'
+        sh 'docker tag student-app sandeeplv/student-app:$BUILD_NUMBER'
     }
     
     stage("Docker Login"){
@@ -28,7 +28,7 @@ stages {
     }
     
     stage("Push Image to Docker Hub"){
-        sh 'docker push sandeeplv/student-app:v30'
+        sh 'docker push sandeeplv/student-app:$BUILD_NUMBER'
     }
     
     stage("K8 Deploy") {
